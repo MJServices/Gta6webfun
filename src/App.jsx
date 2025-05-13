@@ -1,39 +1,55 @@
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import { useState } from "react"
-import 'remixicon/fonts/remixicon.css'
-
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useState } from "react";
+import "remixicon/fonts/remixicon.css";
 
 const App = () => {
-  const [showContent, setShowContent] = useState(false)
+  const [showContent, setShowContent] = useState(false);
   useGSAP(() => {
-   const tl = gsap.timeline()
+    const tl = gsap.timeline();
 
-   tl.to(".vi-mask-group", {
-     duration: 2,
-     rotate: 10,
-     ease: "power2.easeInOut",
-     transformOrigin: "50% 50%",
-   })
-   .to(".vi-mask-group", {
-     delay: -1.8,
-     duration: 2,
-     scale: 10,
-     ease: "expo.easeInOut",
-     transformOrigin: "50% 50%",
-     opacity: 0,
-     onUpdate: function (){
-      if(this.progress() >= 0.9){
-        document.querySelector(".svg").remove()
-        setShowContent(true)
-        this.kill()
-      }
-     }
-   })
-  })
+    tl.to(".vi-mask-group", {
+      duration: 2,
+      rotate: 10,
+      ease: "power2.easeInOut",
+      transformOrigin: "50% 50%",
+    }).to(".vi-mask-group", {
+      delay: -1.8,
+      duration: 2,
+      scale: 10,
+      ease: "expo.easeInOut",
+      transformOrigin: "50% 50%",
+      opacity: 0,
+      onUpdate: function () {
+        if (this.progress() >= 0.9) {
+          document.querySelector(".svg").remove();
+          setShowContent(true);
+          this.kill();
+        }
+      },
+    });
+  });
+  useGSAP(() => {
+    const main = document.querySelector(".main");
+    main?.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      gsap.to(".imagesdiv .text", {
+        x: `${x * 0.4}%`,
+        transformOrigin: "50% 50%",
+      });
+      gsap.to(".imagesdiv .sky", {
+        x: `${x * 0.1}%`,
+        transformOrigin: "50% 50%",
+      });
+      gsap.to(".imagesdiv .bg", {
+        x: `${x * 0.2}%`,
+        transformOrigin: "50% 50%",
+      });
+    });
+  }, [showContent]);
   return (
     <>
-    <div className="svg flex items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]">
+      <div className="svg flex items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]">
         <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
           <defs>
             <mask id="viMask">
@@ -62,9 +78,9 @@ const App = () => {
           />
         </svg>
       </div>
-    {showContent && (
-      <div className="main w-full">
-      <div className="landing overflow-hidden relative w-full h-screen bg-black">
+      {showContent && (
+        <div className="main w-full">
+          <div className="landing overflow-hidden relative w-full h-screen bg-black">
             <div className="navbar absolute top-0 left-0 z-[10] w-full py-10 px-10">
               <div className="logo flex gap-4">
                 <div className="lines flex flex-col gap-[5px]">
@@ -80,16 +96,16 @@ const App = () => {
 
             <div className="imagesdiv relative overflow-hidden w-full h-screen">
               <img
-                className="absolute sky scale-[1.5] rotate-[-20deg] top-0 left-0 w-full h-full object-cover"
+                className="absolute sky scale-[1.2] top-0 left-0 w-full h-full object-cover"
                 src="./sky.png"
                 alt=""
               />
               <img
-                className="absolute scale-[1.8] rotate-[-3deg] bg top-0 left-0 w-full h-full object-cover"
+                className="absolute scale-[1.1] rotate-[-3deg] bg top-0 left-0 w-full h-full object-cover"
                 src="./bg.png"
                 alt=""
               />
-              <div className="text text-white flex flex-col gap-2 absolute left-1/2 top-8 -translate-x-1/2 scale-[1]">
+              <div className="text text-white flex flex-col gap-2 absolute left-[40%] top-8 -translate-x-1/2 scale-[1]">
                 <h1 className="text-[5rem] leading-none -ml-10">grand</h1>
                 <h1 className="text-[5rem] leading-none ml-15">theft</h1>
                 <h1 className="text-[5rem] leading-none -ml-20">auto</h1>
@@ -102,10 +118,8 @@ const App = () => {
             </div>
             <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent">
               <div className="flex gap-2 items-center">
-               <i class="ri-arrow-down-long-line"></i>
-                <h3 className="text-sm font-[Arial]">
-                  Scroll Down
-                </h3>
+                <i class="ri-arrow-down-long-line"></i>
+                <h3 className="text-sm font-[Arial]">Scroll Down</h3>
               </div>
               <img
                 className="absolute h-[45px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -114,9 +128,9 @@ const App = () => {
               />
             </div>
           </div>
-      </div>
-    )}
+        </div>
+      )}
     </>
-  )
-}
-export default App
+  );
+};
+export default App;
