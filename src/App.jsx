@@ -30,6 +30,50 @@ const App = () => {
     });
   });
   useGSAP(() => {
+     if (!showContent) return;
+
+    gsap.to(".main", {
+      scale: 1,
+      rotate: 0,
+      duration: 2,
+      delay: "-1",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".sky", {
+      scale: 1.1,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".bg", {
+      scale: 1.1,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".character", {
+      scale: 0.9,
+      x: "-50%",
+      bottom: "-85%",
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
+    gsap.to(".text", {
+      scale: 1.2,
+      rotate: 0,
+      duration: 2,
+      delay: "-.8",
+      ease: "Expo.easeInOut",
+    });
+
     const main = document.querySelector(".main");
     main?.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 40;
@@ -79,8 +123,8 @@ const App = () => {
         </svg>
       </div>
       {showContent && (
-        <div className="main w-full">
-          <div className="landing overflow-hidden relative w-full h-screen bg-black">
+        <div className="main w-full rotate-[-10deg] scale-[1.7]">
+          <div className="landing overflow-hidden relative w-full h-screen bg-black ">
             <div className="navbar absolute top-0 left-0 z-[10] w-full py-10 px-10">
               <div className="logo flex gap-4">
                 <div className="lines flex flex-col gap-[5px]">
@@ -126,6 +170,44 @@ const App = () => {
                 src="./ps5.png"
                 alt=""
               />
+            </div>
+          </div>
+          <div className="w-full h-screen flex items-center justify-center bg-black overflow-hidden">
+            <div className="cntnr flex text-white w-full h-full ">
+              <div className="limg relative w-1/2 h-full">
+                <img
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  src="./imag.png"
+                  alt=""
+                />
+              </div>
+              <div className="rg w-[40%] py-30">
+                <h1 className="text-5xl">Still Running,</h1>
+                <h1 className="text-5xl">Not Hunting</h1>
+                <p className="mt-10 text-sm font-[Arial]">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Distinctio possimus, asperiores nam, omnis inventore nesciunt
+                  a architecto eveniet saepe, ducimus necessitatibus at
+                  voluptate.
+                </p>
+                <p className="mt-3 text-sm font-[Arial]">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At
+                  eius illum fugit eligendi nesciunt quia similique velit
+                  excepturi soluta tenetur illo repellat consectetur laborum
+                  eveniet eaque, dicta, hic quisquam? Ex cupiditate ipsa nostrum
+                  autem sapiente.
+                </p>
+                <p className="mt-10 text-sm font-[Arial]">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At
+                  eius illum fugit eligendi nesciunt quia similique velit
+                  excepturi soluta tenetur illo repellat consectetur laborum
+                  eveniet eaque, dicta, hic quisquam? Ex cupiditate ipsa nostrum
+                  autem sapiente.
+                </p>
+                <button className="bg-yellow-500 px-10 py-4 text-black mt-10 text-2xl">
+                  Download Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
